@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Card Registration";
+}
+@model CardPaymentViewModel
+
+<div class="container">
+    <div class="breadcrumb"></div>
+</div>
+
+
+
+<div>
+    <form id="register-payment-card" class="form-inline" asp-controller="RegisterCard" asp-action="Register" method="post">
+        <div class="form-group">
+            <label asp-for="CardNumberString">16 Digit Card Number</label>
+            <input type="text" asp-for="CardNumberString" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CardOwnersName">CardHolders Name</label>
+            <input type="text" asp-for="CardOwnersName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CardAddress.AddressLine1">Address Line 1</label>
+            <input type="text" asp-for="CardAddress.AddressLine1" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CardAddress.AddressLine2">Address Line 2</label>
+            <input type="text" asp-for="CardAddress.AddressLine2" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CardAddress.Town">Town</label>
+            <input type="text" asp-for="CardAddress.Town" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CardAddress.County">County</label>
+            <input type="text" asp-for="CardAddress.County" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CardAddress.Postcode">Post Code</label>
+            <input type="text" asp-for="CardAddress.Postcode" />
+        </div>
+
+        <input class="btn btn-sm registerBtn" type="submit" value="Register Card Details" />
+        <input class="btn cancel-details-btn btn-sm detailsBtn" value="Cancel" onClick="window.location.reload()" />
+
+    </form>
+</div>
+
+
+<div id="comfirmationModal" class="modal hide fade in" data-url="@Url.Action()"></div>
+
+<script>
+    $(document).ready(function() {
+        $('.registerBtn').prop('disabled', true);
+    })
+</script>
