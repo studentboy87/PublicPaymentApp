@@ -10,9 +10,9 @@ namespace PaymentApp.ViewModels
     public class CardPaymentViewModel
     {
         [Required, CreditCard]
-        public string CardNumberString { get; set; }
+        public int CardNumberString { get; set; }
 
-        public int CardNumber => int.Parse(CardNumberString);
+        //public int CardNumber => int.Parse(CardNumberString);
         [Required]
         public string CardOwnersName { get; set; }
         public AddressViewModel CardAddress { get; set; }

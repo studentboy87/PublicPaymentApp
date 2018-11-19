@@ -4,9 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PaymentApp</title>
-
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+<header class="container"></header>
 
 
 
@@ -20,7 +22,8 @@
     </footer>
 </div>
 <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
-<link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-@RenderSection("Scripts", required: false)
+<script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/registerCard.js"></script>
+@RenderSection("scripts", false)
 </body>
 </html>
