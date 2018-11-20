@@ -1,0 +1,56 @@
+﻿@model CardPaymentViewModel
+
+@{
+    ViewData["Title"] = "Card Registration";
+}
+@section Scripts
+    {
+
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="col-md-6 offset-md-3">
+    <div class="card card-body bg-light">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label class="control-label" asp-for="CardNumberString">16 Digit Card Number</label>
+                <input class="form-control" asp-for="CardNumberString" />
+                <span asp-validation-for="CardNumberString" class="text-danger"></span>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardOwnersName">CardHolders Name</label>
+                    <input class="form-control" asp-for="CardOwnersName" />
+                    <span asp-validation-for="CardOwnersName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.AddressLine1">Address Line 1</label>
+                    <input class="form-control" asp-for="CardAddress.AddressLine1" />
+                    <span asp-validation-for="CardAddress.AddressLine1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.AddressLine2">Address Line 2</label>
+                    <input class="form-control" asp-for="CardAddress.AddressLine2" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.Town">Town</label>
+                    <input class="form-control" asp-for="CardAddress.Town" />
+                    <span asp-validation-for="CardAddress.Town" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.County">County</label>
+                    <input class="form-control" asp-for="CardAddress.County" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.Postcode">Post Code</label>
+                    <input class="form-control" asp-for="CardAddress.Postcode" />
+                    <span asp-validation-for="CardAddress.Postcode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-envelope"></i> Send Message</button>
+                <div class="text-success">@ViewBag.UserMessage</div>
+            </div>
+        </form>
+    </div>
+</div>

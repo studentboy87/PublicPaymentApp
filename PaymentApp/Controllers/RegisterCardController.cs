@@ -10,6 +10,7 @@ namespace PaymentApp.Controllers
 {
     public class RegisterCardController : Controller
     {
+
         public IActionResult Index()
         {
             return View();
@@ -18,12 +19,20 @@ namespace PaymentApp.Controllers
         [HttpPost]
         public IActionResult Index(CardPaymentViewModel model)
         {
-            return View();
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Register(CardPaymentViewModel model, bool confirmation = false)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
+            else
+            {
+
+            }
             return RedirectToAction("Index");
         }
 
@@ -32,5 +41,25 @@ namespace PaymentApp.Controllers
         {
             return RedirectToAction("Index");
         }
+
+        [HttpGet("registerCard")]
+        public IActionResult RegisterCard()
+        {
+            return View();
+        }
+        [HttpPost("registerCard")]
+        public IActionResult RegisterCard(CardPaymentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.UserMessage = "Done";
+                ModelState.Clear();
+            }
+            return View();
+        }
+
+
+
+
     }
 }

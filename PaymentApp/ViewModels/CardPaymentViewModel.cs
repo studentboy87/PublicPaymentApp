@@ -9,8 +9,9 @@ namespace PaymentApp.ViewModels
 {
     public class CardPaymentViewModel
     {
-        [Required, CreditCard]
-        public int CardNumberString { get; set; }
+        [Required]
+        [CreditCard(ErrorMessage ="This is not correct")]
+        public string CardNumberString { get; set; }
 
         //public int CardNumber => int.Parse(CardNumberString);
         [Required]
