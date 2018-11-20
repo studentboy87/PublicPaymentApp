@@ -1,9 +1,15 @@
-﻿@model CardPaymentViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Rendering;
+@model CardPaymentViewModel
 
 @{
     ViewData["Title"] = "Card Registration";
+    var monthSelect = new SelectList(Enumerable.Range(1, 12).Select(x => x.ToString().PadLeft(2,'0')).ToList());
+    var yearSelect = new SelectList(Enumerable.Range(DateTime.Now.Year, 20).Select(x => x.ToString().Remove(0, 2)).ToList());
+    
+
+
 }
-@section Scripts
+    @section Scripts
     {
 
     <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
@@ -28,6 +34,13 @@
                     <input class="form-control" asp-for="CardAddress.AddressLine1" />
                     <span asp-validation-for="CardAddress.AddressLine1" class="text-danger"></span>
                 </div>
+                <div class="form-inline">
+                    <label class="control-label" asp-for="ExpiryMonth">Expiry Date of Card</label>
+                    <select asp-for="ExpiryMonth" asp-items="monthSelect"></select> /
+                    <select asp-for="ExpiryYear" asp-items="yearSelect"></select>
+                </div>
+                @*@Html.DropDownList("ExpiryYear", Enumerable.Range(DateTime.Now.Year, 20).Select(x => new SelectListItem { Text = x.ToString().Remove(0,2) }), "Expiry Year")
+                    @Html.DropDownList("ExpiryMonth", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString() }), "Expiry Month")*@
                 <div class="form-group">
                     <label class="control-label" asp-for="CardAddress.AddressLine2">Address Line 2</label>
                     <input class="form-control" asp-for="CardAddress.AddressLine2" />

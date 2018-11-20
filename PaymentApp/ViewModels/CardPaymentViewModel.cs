@@ -16,8 +16,17 @@ namespace PaymentApp.ViewModels
 
         //public int CardNumber => int.Parse(CardNumberString);
         [Required]
+        [Display(Name ="Cardholder's Name", Prompt ="Cardholder's Name")]
         public string CardOwnersName { get; set; }
         public AddressViewModel CardAddress { get; set; }
+        [Required]
+        public string ExpiryMonth { get; set; }
+        [Required]
+        public string ExpiryYear { get; set; }
+
+
+
+        public DateTime CardExpiryDate { get; set; }
 
     }
 }
