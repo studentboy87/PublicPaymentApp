@@ -16,7 +16,7 @@
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
                 <label class="control-label" asp-for="CardNumberString">16 Digit Card Number</label>
-                <input class="form-control" asp-for="CardNumberString" />
+                <input class="form-control" type="number" asp-for="CardNumberString" />
                 <span asp-validation-for="CardNumberString" class="text-danger"></span>
                 <div class="form-group">
                     <label class="control-label" asp-for="CardOwnersName">CardHolders Name</label>
