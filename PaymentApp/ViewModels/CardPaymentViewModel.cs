@@ -10,7 +10,8 @@ namespace PaymentApp.ViewModels
     public class CardPaymentViewModel
     {
         [Required]
-        [CreditCard(ErrorMessage ="This is not correct")]
+        [CreditCard]
+        [Display(Name = "Card Number", Prompt = "The 16 digit number across the face of the card")]
         public string CardNumberString { get; set; }
 
         //public int CardNumber => int.Parse(CardNumberString);
