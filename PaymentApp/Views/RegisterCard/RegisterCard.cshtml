@@ -41,6 +41,7 @@
                     <label class="control-label" asp-for="ExpiryMonth">Expiry Date of Card</label>
                     <select asp-for="ExpiryMonth" asp-items="monthSelect"></select> /
                     <select asp-for="ExpiryYear" asp-items="yearSelect"></select>
+                    <span asp-validation-for="parsedDate" class="text-danger"></span>
                 </div>
                 @*@Html.DropDownList("ExpiryYear", Enumerable.Range(DateTime.Now.Year, 20).Select(x => new SelectListItem { Text = x.ToString().Remove(0,2) }), "Expiry Year")
                     @Html.DropDownList("ExpiryMonth", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString() }), "Expiry Month")*@
