@@ -3,9 +3,12 @@
 
 @{
     ViewData["Title"] = "Card Registration";
+
+    var years = Enumerable.Range(DateTime.Now.Year, 20).Select(x => new { Text = x.ToString().Remove(0,2), ID = x.ToString()}).ToList();
     var monthSelect = new SelectList(Enumerable.Range(1, 12).Select(x => x.ToString().PadLeft(2,'0')).ToList());
-    var yearSelect = new SelectList(Enumerable.Range(DateTime.Now.Year, 20).Select(x => x.ToString().Remove(0, 2)).ToList());
-    
+    /*var yearSelect = new SelectList(Enumerable.Range(DateTime.Now.Year, 20).Select(x => x.ToString().Remove(0, 2)).ToList());*/
+    var yearSelect = new SelectList(years, "ID", "Text");
+
 
 
 }
