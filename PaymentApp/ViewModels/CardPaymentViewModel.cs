@@ -25,7 +25,10 @@ namespace PaymentApp.ViewModels
         public string ExpiryYear { get; set; }
 
 
-        public string ExpiryDateString => DateTime.DaysInMonth(int.Parse(ExpiryYear), int.Parse(ExpiryMonth)) + ExpiryMonth + ExpiryYear;
+        public string ExpiryDateString => DateTime.DaysInMonth(int.Parse(ExpiryYear), int.Parse(ExpiryMonth)) + "-" + ExpiryMonth + "-" + ExpiryYear;
+
+
+        public DateTime parsedDate => DateTime.ParseExact(ExpiryDateString, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None);
 
         //private int asf => DateTime.DaysInMonth()
         /*public DateTime CardExpiryDate => new DateTime(int.Parse(ExpiryYear), int.Parse(ExpiryMonth), DateTime.DaysInMonth(int.Parse(ExpiryYear), int.Parse(ExpiryMonth)), )*/
