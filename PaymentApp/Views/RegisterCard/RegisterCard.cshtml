@@ -4,27 +4,28 @@
 @{
     ViewData["Title"] = "Card Registration";
 
-    var years = Enumerable.Range(DateTime.Now.Year, 20).Select(x => new { Text = x.ToString().Remove(0,2), ID = x.ToString()}).ToList();
-    var monthSelect = new SelectList(Enumerable.Range(1, 12).Select(x => x.ToString().PadLeft(2,'0')).ToList());
-    /*var yearSelect = new SelectList(Enumerable.Range(DateTime.Now.Year, 20).Select(x => x.ToString().Remove(0, 2)).ToList());*/
+    var years = Enumerable.Range(DateTime.Now.Year, 20).Select(x => new { Text = x.ToString().Remove(0, 2), ID = x.ToString() }).ToList();
+    var monthSelect = new SelectList(Enumerable.Range(1, 12).Select(x => x.ToString().PadLeft(2, '0')).ToList());
     var yearSelect = new SelectList(years, "ID", "Text");
 
 
 
 }
-    @section Scripts
+@section Scripts
     {
 
     <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/node_modules/jquery-validation/dist/additional-methods.min.js"></script>
     <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/registerCard.js"></script>
 }
 
 <div class="col-md-6 offset-md-3">
     <div class="card card-body bg-light">
-        <form method="post">
+        <form method="post" id="registerCard">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
-                <label class="control-label" asp-for="CardNumberString">16 Digit Card Number</label>
+                <label class="control-label" asp-for="CardNumberString">Card Number</label>
                 <input class="form-control" type="number" asp-for="CardNumberString" />
                 <span asp-validation-for="CardNumberString" class="text-danger"></span>
                 <div class="form-group">
@@ -41,10 +42,10 @@
                     <label class="control-label" asp-for="ExpiryMonth">Expiry Date of Card</label>
                     <select asp-for="ExpiryMonth" asp-items="monthSelect"></select> /
                     <select asp-for="ExpiryYear" asp-items="yearSelect"></select>
-                    <span asp-validation-for="parsedDate" class="text-danger"></span>
+                    <span asp-validation-for="ExpiryMonth" class="text-danger"></span>
+                    <span asp-validation-for="ExpiryYear" class="text-danger"></span>
+                    <span asp-validation-for="ExpiryDate" class="text-danger"></span>
                 </div>
-                @*@Html.DropDownList("ExpiryYear", Enumerable.Range(DateTime.Now.Year, 20).Select(x => new SelectListItem { Text = x.ToString().Remove(0,2) }), "Expiry Year")
-                    @Html.DropDownList("ExpiryMonth", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString() }), "Expiry Month")*@
                 <div class="form-group">
                     <label class="control-label" asp-for="CardAddress.AddressLine2">Address Line 2</label>
                     <input class="form-control" asp-for="CardAddress.AddressLine2" />
@@ -64,10 +65,36 @@
                     <span asp-validation-for="CardAddress.Postcode" class="text-danger"></span>
                 </div>
             </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-envelope"></i> Send Message</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg" disabled><i class=""></i>Register Card</button>
                 <div class="text-success">@ViewBag.UserMessage</div>
             </div>
         </form>
     </div>
 </div>
+

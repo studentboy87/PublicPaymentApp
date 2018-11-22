@@ -12,6 +12,7 @@ namespace PaymentApp.ViewModels
     {
         [Required]
         [CreditCard]
+        [StringLength(16, MinimumLength =16)]
         [Display(Name = "Card Number", Prompt = "The 16 digit number across the face of the card")]
         public string CardNumberString { get; set; }
 
@@ -28,15 +29,9 @@ namespace PaymentApp.ViewModels
 
         public string ExpiryDateString => DateTime.DaysInMonth(int.Parse(ExpiryYear), int.Parse(ExpiryMonth)) + "-" + ExpiryMonth + "-" + ExpiryYear;
 
-        //[CustomValidation(DateTime.UtcNow.Month < parsedDate)] creating own method for this. see https://stackoverflow.com/questions/17321948/is-there-a-rangeattribute-for-datetime
-
 
         [GreaterThanCurrentMonth]
-        public DateTime parsedDate => DateTime.ParseExact(ExpiryDateString, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None);
+        public DateTime ExpiryDate => DateTime.ParseExact(ExpiryDateString, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None);
 
-        //private int asf => DateTime.DaysInMonth()
-        /*public DateTime CardExpiryDate => new DateTime(int.Parse(ExpiryYear), int.Parse(ExpiryMonth), DateTime.DaysInMonth(int.Parse(ExpiryYear), int.Parse(ExpiryMonth)), )*/
-        //public DateTime test => DateTime.ParseExact(ExpiryDateString, "ddMMyy",);
-        //public DateTime test => DateTime.Parse(ExpiryDateString, "ddMMyy");
     }
 }

@@ -11,10 +11,14 @@ namespace PaymentApp.ViewModels
     {
         [Required(ErrorMessage = "Cardholder's address is required")]
         public string AddressLine1 { get; set; }
+
         public string AddressLine2 { get; set; }
+
         [Required(ErrorMessage = "Cardholder's address is required")]
         public string Town { get; set; }
+
         public string County { get; set; }
+
         [Required(ErrorMessage = "Cardholder's address is required")]
         public string Postcode { get; set; }
     }

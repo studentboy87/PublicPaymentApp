@@ -54,8 +54,21 @@ namespace PaymentApp.Controllers
             {
                 ViewBag.UserMessage = "Done";
                 ModelState.Clear();
+
+
+
+                ConfirmCardRegistration(model);
+            }
+            else
+            {
+                return View();
             }
             return View();
+        }
+        [HttpPost]
+        public IActionResult ConfirmCardRegistration(CardPaymentViewModel model)
+         {
+            return PartialView("_ConfirmCardDetails", model);
         }
 
 
