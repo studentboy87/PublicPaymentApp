@@ -66,9 +66,9 @@
                 </div>
             </div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Launch demo modal
-            </button>
+            </button>*@
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -85,13 +85,13 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg" disabled><i class=""></i>Register Card</button>
+                <button type="button" id="btnSubmit" class="btn btn-primary btn-lg" disabled data-toggle="modal" data-target="#exampleModal"><i class=""></i>Register Card</button>
                 <div class="text-success">@ViewBag.UserMessage</div>
             </div>
         </form>

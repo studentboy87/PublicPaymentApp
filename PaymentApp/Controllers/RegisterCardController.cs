@@ -52,12 +52,7 @@ namespace PaymentApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.UserMessage = "Done";
                 ModelState.Clear();
-
-
-
-                ConfirmCardRegistration(model);
             }
             else
             {

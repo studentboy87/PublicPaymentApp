@@ -46,7 +46,7 @@ namespace PaymentApp
             {
                 cfg.MapRoute("Default",
                     "{controller}/{action}/{id?}",
-                    new { controller = "App", Action = "Index" });
+                    new { controller = "RegisterCard", Action = "RegisterCard" });
             });
 
         }
