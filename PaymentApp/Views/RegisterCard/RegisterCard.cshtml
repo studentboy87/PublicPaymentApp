@@ -26,11 +26,11 @@
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
                 <label class="control-label" asp-for="CardNumberString">Card Number</label>
-                <input class="form-control" type="number" asp-for="CardNumberString" />
+                <input class="form-control cardNumber" type="number" asp-for="CardNumberString" />
                 <span asp-validation-for="CardNumberString" class="text-danger"></span>
                 <div class="form-group">
-                    <label class="control-label" asp-for="CardOwnersName">CardHolders Name</label>
-                    <input class="form-control" asp-for="CardOwnersName" />
+                    <label class="control-label" asp-for="CardOwnersName">Cardholders Name</label>
+                    <input class="form-control holderName" asp-for="CardOwnersName" />
                     <span asp-validation-for="CardOwnersName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -81,8 +81,25 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <div class="form-group">
+                                <label class="control-label" for="cardNumModal">CardNum</label>
+                                <input disabled="disabled" id="modalCardNum" name="modalCardNum" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="modalCardOwnerName">Cardholder's Name:</label>
+                                <input disabled="disabled" id="modalCardOwnerName" name="modalCardOwnerName" class="form-control" />
+                            </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label" for=""></label>
+                            <input disabled="disabled" id="" name="" class="form-control"/>
+                        </div>
+
+
+
+
+
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -97,4 +114,3 @@
         </form>
     </div>
 </div>
-
