@@ -10,6 +10,7 @@ namespace PaymentApp.ViewModels
     public class AddressViewModel
     {
         [Required(ErrorMessage = "Cardholder's address is required")]
+        //[]need to add display to all of these
         public string AddressLine1 { get; set; }
 
         public string AddressLine2 { get; set; }
