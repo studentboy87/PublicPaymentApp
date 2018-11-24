@@ -11,16 +11,16 @@ namespace PaymentApp.Controllers
     public class RegisterCardController : Controller
     {
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public IActionResult Index(CardPaymentViewModel model)
-        {
-            return View(model);
-        }
+        //[HttpPost]
+        //public IActionResult Index(CardPaymentViewModel model)
+        //{
+        //    return View(model);
+        //}
 
         [HttpPost]
         public IActionResult Register(CardPaymentViewModel model, bool confirmation = false)
@@ -60,11 +60,11 @@ namespace PaymentApp.Controllers
             }
             return View();
         }
-        [HttpPost]
-        public IActionResult ConfirmCardRegistration(CardPaymentViewModel model)
-         {
-            return PartialView("_ConfirmCardDetails", model);
-        }
+        //[HttpPost]
+        //public IActionResult ConfirmCardRegistration(CardPaymentViewModel model)
+        // {
+        //    return PartialView("_ConfirmCardDetails", model);
+        //}
 
 
 

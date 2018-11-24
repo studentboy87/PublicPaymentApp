@@ -54,7 +54,13 @@
     $('.addressPostCode').change(function () {
         $('#modalAddressPostCode').val($(this).val());
     });
+    $('#CardExpiryDate').change(function () {
+        $('#modalCardExpiryDate').val($(this).val());
+    });
+
     $('#ExpiryMonth').change(updateCardExpiryDate($('#CardExpiryDate'), $('#ExpiryMonth'), $('#ExpiryYear')));
+    $('#ExpiryYear').change(updateCardExpiryDate($('#CardExpiryDate'), $('#ExpiryMonth'), $('#ExpiryYear')));
+
 
 });
 

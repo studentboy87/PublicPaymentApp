@@ -43,7 +43,7 @@ namespace PaymentApp.CustomValidation
             var error = FormatErrorMessage(context.ModelMetadata.GetDisplayName());
             context.Attributes.Add("data-val", "true");
             context.Attributes.Add("data-val-error", error);
-            context.Attributes.Add("cardexpirydate", endOfTheMonth);
+            context.Attributes.Add("data-val-cardexpirydate", endOfTheMonth);
 
         }
 
