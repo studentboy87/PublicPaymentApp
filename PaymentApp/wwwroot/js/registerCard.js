@@ -19,7 +19,7 @@
     }
 
 
-    function updateCardExpiryDate(cardExDate, exMonth, exYear) {
+    function updateCardExpiryDate(cardExDate, modalExDate, exMonth, exYear) {
         $(exMonth).bind('keypress keyup blur click', function () {
             var month = $(exMonth).val();
             var year = $(exYear).val();
@@ -30,6 +30,7 @@
             }
             var displayDate = year + month + date;
             $(cardExDate).val(displayDate);
+            $(modalExDate).val(month + "/" + year);
         });
     }
 
@@ -58,8 +59,8 @@
         $('#modalCardExpiryDate').val($(this).val());
     });
 
-    $('#ExpiryMonth').change(updateCardExpiryDate($('#CardExpiryDate'), $('#ExpiryMonth'), $('#ExpiryYear')));
-    $('#ExpiryYear').change(updateCardExpiryDate($('#CardExpiryDate'), $('#ExpiryMonth'), $('#ExpiryYear')));
+    $('#ExpiryMonth').change(updateCardExpiryDate($('#CardExpiryDate'), $('#modalCardExpiryDate'), $('#ExpiryMonth'), $('#ExpiryYear')));
+    $('#ExpiryYear').change(updateCardExpiryDate($('#CardExpiryDate'),  $('#modalCardExpiryDate'),$('#ExpiryMonth'), $('#ExpiryYear')));
 
 
 });

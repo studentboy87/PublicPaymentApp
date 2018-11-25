@@ -4,12 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PaymentApp.Data;
 using PaymentApp.ViewModels;
 
 namespace PaymentApp.Controllers
 {
     public class RegisterCardController : Controller
     {
+        private readonly RegisterCardContext _context;
+        public RegisterCardController(RegisterCardContext context)
+        {
+            _context = context;
+        }
 
         //public IActionResult Index()
         //{
@@ -22,26 +28,8 @@ namespace PaymentApp.Controllers
         //    return View(model);
         //}
 
-        [HttpPost]
-        public IActionResult Register(CardPaymentViewModel model, bool confirmation = false)
-        {
-            if (ModelState.IsValid)
-            {
 
-            }
-            else
-            {
-
-            }
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public IActionResult ConfirmCardRegistration(bool confirmation)
-        {
-            return RedirectToAction("Index");
-        }
-
+        //on load
         [HttpGet("registerCard")]
         public IActionResult RegisterCard()
         {
@@ -60,6 +48,29 @@ namespace PaymentApp.Controllers
             }
             return View();
         }
+
+        //[HttpPost]
+        //public IActionResult Register(CardPaymentViewModel model, bool confirmation = false)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
+        //[HttpPost]
+        //public IActionResult ConfirmCardRegistration(bool confirmation)
+        //{
+        //    return RedirectToAction("Index");
+        //}
+
+
+
         //[HttpPost]
         //public IActionResult ConfirmCardRegistration(CardPaymentViewModel model)
         // {
