@@ -17,19 +17,6 @@ namespace PaymentApp.Controllers
             _context = context;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult Index(CardPaymentViewModel model)
-        //{
-        //    return View(model);
-        //}
-
-
-        //on load
         [HttpGet("registerCard")]
         public IActionResult RegisterCard()
         {
@@ -40,6 +27,21 @@ namespace PaymentApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //to test
+                if (!LuhnCheck(model.CardNumberString) || !CardExpiryDateIsValid(model.ExpiryDate))
+                {
+                    return View();
+                }
+
+                                //to test
+               
+
+
+
+
+
+
+
                 ModelState.Clear();
             }
             else
@@ -49,35 +51,35 @@ namespace PaymentApp.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Register(CardPaymentViewModel model, bool confirmation = false)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
 
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-
-        //[HttpPost]
-        //public IActionResult ConfirmCardRegistration(bool confirmation)
-        //{
-        //    return RedirectToAction("Index");
-        //}
+        private bool LuhnCheck(string cardNumber)
+        {
 
 
+            int checksum = 0;
+            bool evenDigit = false;
+            foreach(char cardDigit in cardNumber.Reverse())
+            {
+                if(cardDigit <'0'|| cardDigit > '9')
+                {
+                    return false;
+                }
+                int digitValue = (cardDigit - '0') * (evenDigit ? 2 : 1);
+                evenDigit = !evenDigit;
 
-        //[HttpPost]
-        //public IActionResult ConfirmCardRegistration(CardPaymentViewModel model)
-        // {
-        //    return PartialView("_ConfirmCardDetails", model);
-        //}
+                while(digitValue > 0)
+                {
+                    checksum += digitValue % 10;
+                    digitValue /= 10;
+                }
+            }
+            return (checksum %10) == 0;
+        }
 
-
+        private bool CardExpiryDateIsValid(DateTime expiryDate)
+        {
+            return DateTime.Now <= expiryDate;
+        }
 
 
     }

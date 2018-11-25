@@ -19,6 +19,11 @@ namespace PaymentApp.CustomValidation
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             ErrorMessage = ErrorMessageString;
+            if(value == null)
+            {
+                return new ValidationResult(ErrorMessage);
+            }
+
             var currentValue = DateTime.ParseExact((string)value, "yyyyMMdd", null);
             var endOfTheMonth = validationContext.ObjectType.GetProperty(_comparisonProperty);
 
