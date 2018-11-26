@@ -18,26 +18,12 @@
     <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/registerCard.js"></script>
         <script>
-            //$.validator.addMethod('cardexpirydate', function (value, element, params) {
-            //    var cardExpiryDate = $(params[0]).val();
-            //    var endOfTheMonth = $(params[1]).val();
-            //    return cardExpiryDate >= endOfTheMonth;
-
-
-            //    //return $('#CardExpiryDate').val() >= $('#EndOfTheCurrentMonth').val();
-            //}, "Card has expired 3")
-
-            //$.validator.unobtrusive.adapters.add('cardexpirydate', [$('#CardExpiryDate').val(), $('#EndOfTheCurrentMonth').val()], function (options) {
-            //    options.rules["cardexpirydate"] = {};
-            //    options.message["cardexpirydate"] = options.message;
-
-            //})
 
             $.validator.addMethod('cardexpirydate', function (value, element, params) {
                 var cardExpiryDate = $(params[0]).val();
                 var endOfTheMonth = $(params[0]).attr('cardexpirydate');
                 return cardExpiryDate >= endOfTheMonth;
-            }, "Card has expired 3")
+            }, "The card has expired")
 
             $.validator.unobtrusive.adapters.add('cardexpirydate', [$('#CardExpiryDate').val(), $('#CardExpiryDate').attr], function (options) {
                 options.rules["cardexpirydate"] = {};

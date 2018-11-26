@@ -18,7 +18,7 @@ namespace PaymentApp.CustomValidation
             }
             else
             {
-                return new ValidationResult("Card has expired");
+                return new ValidationResult("The card has expired");
             }
 
         }

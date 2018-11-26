@@ -51,32 +51,5 @@ namespace PaymentApp.CustomValidation
             context.Attributes.Add("data-val-cardexpirydate", endOfTheMonth);
 
         }
-
-
-
-
-        //public void AddValidation(ClientModelValidationContext context)
-        //{
-        //    MergeAttribute(context.Attributes, "data-val", "true");
-        //}
-        //private void MergeAttribute(IDictionary<string, string> attributes, string v1, string v2)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //works for server only - need to remove ctr and IClient to use
-        //protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        //{
-        //    value = (string)value;
-        //    DateTime expiryDate = DateTime.ParseExact((string)value, "yyyyMMdd", null);
-        //    if(DateTime.Now <= expiryDate)
-        //    {
-        //        return ValidationResult.Success;
-        //    }
-        //    else
-        //    {
-        //        return new ValidationResult("Card Date has expired");
-        //    }
-        //}
     }
 }

@@ -28,50 +28,47 @@ namespace PaymentApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                //to test
                 if (!LuhnCheck(model.CardNumberString) || !CardExpiryDateIsValid(model.ExpiryDate))
                 {
                     return View();
                 }
 
-                    UKAddress cardAddress = InsertNewUKCardAddress(model);
+                UKAddress cardAddress = InsertNewUKCardAddress(model);
 
-                    //This method is just here for illustrative purposes and to tie the registered card to a customer
-                    var customerId = GetCustomerId();
+                //This method is just here for illustrative purposes and to tie the registered card to a customer
+                var customerId = GetCustomerId();
 
-                    InsertCardDetails(model, cardAddress.ID, customerId);
+                InsertCardDetails(model, cardAddress.ID, customerId);
 
                 ModelState.Clear();
             }
             else
             {
-                return View();
+                return View(model);
             }
             return View();
         }
 
         private void InsertCardDetails(CardPaymentViewModel model, int addressId, int customerId)
         {
-            using(var ctx = _context)
-            {
+           
 
                 var registeredCard = new RegisteredCard
                 {
-                    CardNumber = long.Parse(model.CardNumberString),
+                    CardNumber = model.CardNumberString,
                     CardHolderName = model.CardOwnersName,
                     CardExpiryDate = model.ExpiryDate,
                     CustomerID = customerId,
                     AddressID = addressId
                 };
-                ctx.RegisteredCards.Add(registeredCard);
-                ctx.SaveChanges();
-            }
+                _context.RegisteredCards.Add(registeredCard);
+                _context.SaveChanges();
+            
         }
 
         private UKAddress InsertNewUKCardAddress(CardPaymentViewModel model)
         {
-            using(var ctx = _context)
-            {
+            
                 var cardAddress = new UKAddress
                 {
                     AddressLine1 = model.CardAddress.AddressLine1,
@@ -80,10 +77,10 @@ namespace PaymentApp.Controllers
                     County = model.CardAddress.County,
                     Postcode = model.CardAddress.Postcode
                 };
-                ctx.UKAddresses.Add(cardAddress);
-                ctx.SaveChanges();
+            _context.UKAddresses.Add(cardAddress);
+            _context.SaveChanges();
                 return cardAddress;
-            }         
+            
         }
 
         private bool LuhnCheck(string cardNumber)
@@ -92,22 +89,22 @@ namespace PaymentApp.Controllers
 
             int checksum = 0;
             bool evenDigit = false;
-            foreach(char cardDigit in cardNumber.Reverse())
+            foreach (char cardDigit in cardNumber.Reverse())
             {
-                if(cardDigit <'0'|| cardDigit > '9')
+                if (cardDigit < '0' || cardDigit > '9')
                 {
                     return false;
                 }
                 int digitValue = (cardDigit - '0') * (evenDigit ? 2 : 1);
                 evenDigit = !evenDigit;
 
-                while(digitValue > 0)
+                while (digitValue > 0)
                 {
                     checksum += digitValue % 10;
                     digitValue /= 10;
                 }
             }
-            return (checksum %10) == 0;
+            return (checksum % 10) == 0;
         }
 
         private bool CardExpiryDateIsValid(DateTime expiryDate)

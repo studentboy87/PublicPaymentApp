@@ -15,7 +15,6 @@
             var ast = "****-****-****-";
             $(cardNumModal).val(ast + trimmedCardNum);
         });
-
     }
 
 
@@ -37,19 +36,12 @@
             var currentMonth = currentDate.getMonth()+1;
             var currentYear = currentDate.getFullYear();
             var endOfCurrentMonth = new Date(currentYear, currentMonth, 0);
-            console.log(validationDate + " validationDate");
-            console.log(displayDate + " dsiplayDate");
-            console.log(endOfCurrentMonth + " endOfCurrentMonth");
-            console.log(month + ": month, " + currentMonth + ": currentMonth");
-
-
 
             if (validationDate < endOfCurrentMonth) {
                 $('#expiredCardAlert').show();
             } else {
                 $('#expiredCardAlert').hide();
             }
-
         });
     }
 

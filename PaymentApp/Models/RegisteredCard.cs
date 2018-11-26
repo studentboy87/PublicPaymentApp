@@ -9,7 +9,7 @@ namespace PaymentApp.Models
     public class RegisteredCard
     {
         public int ID { get; set; }
-        public long CardNumber { get; set; }
+        public string CardNumber { get; set; }
         public string CardHolderName { get; set; }
         public DateTime CardExpiryDate { get; set; }
         public int CustomerID { get; set; }

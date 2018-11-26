@@ -23,7 +23,8 @@ namespace PaymentApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>().ToTable("Customer");
-            modelBuilder.Entity<Address>().ToTable("Adress");
+            modelBuilder.Entity<Address>().ToTable("Address");
+            modelBuilder.Entity<UKAddress>().ToTable("UKAddress");
             modelBuilder.Entity<RegisteredCard>().ToTable("RegisteredCard");
         }
     }

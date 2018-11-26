@@ -10,17 +10,19 @@ namespace PaymentApp.ViewModels
     public class AddressViewModel
     {
         [Required(ErrorMessage = "Cardholder's address is required")]
-        //[]need to add display to all of these
+        [Display(Prompt ="Address line one")]
         public string AddressLine1 { get; set; }
-
+        [Display(Prompt = "Address line two")]
         public string AddressLine2 { get; set; }
 
         [Required(ErrorMessage = "Cardholder's address is required")]
+        [Display(Prompt ="Town")]
         public string Town { get; set; }
-
+        [Display(Prompt ="County")]
         public string County { get; set; }
 
         [Required(ErrorMessage = "Cardholder's address is required")]
+        [Display(Prompt ="AA12 2YZ")]
         public string Postcode { get; set; }
     }
 }

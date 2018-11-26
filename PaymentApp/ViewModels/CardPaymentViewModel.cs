@@ -12,25 +12,28 @@ namespace PaymentApp.ViewModels
     {
         [Required]
         [CreditCard]
-        [StringLength(16, MinimumLength =16)]
+        [StringLength(16, MinimumLength = 16)]
         [Display(Name = "Card Number", Prompt = "The 16 digit number across the face of the card")]
         public string CardNumberString { get; set; }
-//add int cardnumber
 
         [Required]
-        [Display(Name ="Cardholder's Name", Prompt ="Cardholder's Name")]
+        [Display(Name = "Cardholder's Name", Prompt = "Cardholder's Name")]
         public string CardOwnersName { get; set; }
-        public AddressViewModel CardAddress { get; set; }
+
+
+
         [Required]
         public string ExpiryMonth { get; set; }
+
         [Required]
         public string ExpiryYear { get; set; }
 
         [Required]
-        [CardExpiryDate("EndOfTheCurrentMonth", ErrorMessage ="Card has Expired2")]
+        [CardExpiryDate("EndOfTheCurrentMonth", ErrorMessage = "The card has expired")]
         public string CardExpiryDate { get; set; }
 
-        //public DateTime EndOfTheCurrentMonth { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+        public AddressViewModel CardAddress { get; set; }
+
 
         public string EndOfTheCurrentMonth { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)).ToString("yyyyMMdd");
 
