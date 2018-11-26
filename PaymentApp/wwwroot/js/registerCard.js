@@ -1,6 +1,4 @@
-﻿//import { Date } from "core-js";
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     $("#registerCard").on("blur", "input", () => {
         if ($("#registerCard").valid()) {
@@ -33,36 +31,27 @@ $(document).ready(function () {
             var displayDate = year + month + date;
             $(cardExDate).val(displayDate);
             $(modalExDate).val(month + "/" + year);
+            
 
             var currentDate = new Date();
             var currentMonth = currentDate.getMonth()+1;
             var currentYear = currentDate.getFullYear();
             var endOfCurrentMonth = new Date(currentYear, currentMonth, 0);
+            console.log(validationDate + " validationDate");
+            console.log(displayDate + " dsiplayDate");
+            console.log(endOfCurrentMonth + " endOfCurrentMonth");
+            console.log(month + ": month, " + currentMonth + ": currentMonth");
+
+
+
             if (validationDate < endOfCurrentMonth) {
-                //display span
                 $('#expiredCardAlert').show();
             } else {
-            //hide span
                 $('#expiredCardAlert').hide();
             }
 
         });
     }
-
-
-    /*
-    var today, someday;
-    var exMonth = document.getElementById("exMonth");
-    var exYear = document.getElementById("exYear");
-    today = new Date();
-    someday = new Date();
-    someday.setFullYear(exYear, exMonth, 1);
-
-    if (someday < today) {
-        alert("The expiry date is before today's date. Please select a valid expiry date");
-        return false;
-    }
-    */
 
     $('#CardNumberString').change(lastFourDigits($('#CardNumberString'), $('#modalCardNum')));
 
