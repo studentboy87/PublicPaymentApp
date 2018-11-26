@@ -33,29 +33,13 @@ namespace PaymentApp.Controllers
                 {
                     return View();
                 }
-                using (var ctx = _context)
-                {
-                    UKAddress cardAddress = NewMethod(model, ctx);
-                    //ctx.SaveChanges();
+
+                    UKAddress cardAddress = InsertNewUKCardAddress(model);
 
                     //This method is just here for illustrative purposes and to tie the registered card to a customer
                     var customerId = GetCustomerId();
 
-                    var registeredCard = new RegisteredCard
-                    {
-                        //CardNumber = Convert.ToInt64(model.CardNumberString),
-                        CardNumber = long.Parse(model.CardNumberString),
-                        CardHolderName = model.CardOwnersName,
-                        CardExpiryDate = model.ExpiryDate,
-                        CustomerID = customerId,
-                        AddressID = cardAddress.ID,
-                    };
-                    ctx.RegisteredCards.Add(registeredCard);
-                    ctx.SaveChanges();
-                }
-
-
-
+                    InsertCardDetails(model, cardAddress.ID, customerId);
 
                 ModelState.Clear();
             }
@@ -66,18 +50,40 @@ namespace PaymentApp.Controllers
             return View();
         }
 
-        private static UKAddress NewMethod(CardPaymentViewModel model, RegisterCardContext ctx)
+        private void InsertCardDetails(CardPaymentViewModel model, int addressId, int customerId)
         {
-            var cardAddress = new UKAddress
+            using(var ctx = _context)
             {
-                AddressLine1 = model.CardAddress.AddressLine1,
-                AddressLine2 = model.CardAddress.AddressLine2,
-                Town = model.CardAddress.Town,
-                County = model.CardAddress.County,
-                Postcode = model.CardAddress.Postcode
-            };
-            ctx.UKAddresses.Add(cardAddress);
-            return cardAddress;
+
+                var registeredCard = new RegisteredCard
+                {
+                    CardNumber = long.Parse(model.CardNumberString),
+                    CardHolderName = model.CardOwnersName,
+                    CardExpiryDate = model.ExpiryDate,
+                    CustomerID = customerId,
+                    AddressID = addressId
+                };
+                ctx.RegisteredCards.Add(registeredCard);
+                ctx.SaveChanges();
+            }
+        }
+
+        private UKAddress InsertNewUKCardAddress(CardPaymentViewModel model)
+        {
+            using(var ctx = _context)
+            {
+                var cardAddress = new UKAddress
+                {
+                    AddressLine1 = model.CardAddress.AddressLine1,
+                    AddressLine2 = model.CardAddress.AddressLine2,
+                    Town = model.CardAddress.Town,
+                    County = model.CardAddress.County,
+                    Postcode = model.CardAddress.Postcode
+                };
+                ctx.UKAddresses.Add(cardAddress);
+                ctx.SaveChanges();
+                return cardAddress;
+            }         
         }
 
         private bool LuhnCheck(string cardNumber)
