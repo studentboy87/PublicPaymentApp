@@ -16,6 +16,7 @@ namespace PaymentApp.Data
         
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<UKAddress> UKAddresses { get; set; }
         public DbSet<RegisteredCard> RegisteredCards { get; set; }
 
 
