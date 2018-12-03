@@ -1,0 +1,151 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering;
+@model CardPaymentViewModel
+
+@{
+    ViewData["Title"] = "Card Registration";
+
+    var years = Enumerable.Range(DateTime.Now.Year, 20).Select(x => new { Text = x.ToString().Remove(0, 2), ID = x.ToString() }).ToList();
+    var monthSelect = new SelectList(Enumerable.Range(1, 12).Select(x => x.ToString().PadLeft(2, '0')).ToList());
+    var yearSelect = new SelectList(years, "ID", "Text");
+    DateTime today = DateTime.Today;
+    var endOfTheMonth = new DateTime(today.Year, today.Month, DateTime.DaysInMonth(today.Year, today.Month)).ToString("yyyyMMdd");
+}
+
+    @section Scripts
+    {
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/node_modules/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/registerCard.js"></script>
+        <script>
+
+            $.validator.addMethod('cardexpirydate', function (value, element, params) {
+                var cardExpiryDate = $(params[0]).val();
+                var endOfTheMonth = $(params[0]).attr('cardexpirydate');
+                return cardExpiryDate >= endOfTheMonth;
+            }, "The card has expired")
+
+            $.validator.unobtrusive.adapters.add('cardexpirydate', [$('#CardExpiryDate').val(), $('#CardExpiryDate').attr], function (options) {
+                options.rules["cardexpirydate"] = {};
+                options.message["cardexpirydate"] = options.message;
+            })
+
+        </script>
+}
+
+<div class="col-md-6 offset-md-3">
+    <div class="card card-body bg-light">
+        <form method="post" id="registerCard">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label class="control-label" asp-for="CardNumberString">Card Number</label>
+                <input class="form-control cardNumber" type="number" asp-for="CardNumberString" />
+                <span asp-validation-for="CardNumberString" class="text-danger"></span>
+            </div>
+
+                <div class="form-inline">
+                    <label class="control-label" asp-for="ExpiryMonth">Expiry Date of Card MM/YY &nbsp;</label>
+                    <select asp-for="ExpiryMonth" asp-items="monthSelect"></select> /
+                    <select asp-for="ExpiryYear" asp-items="yearSelect"></select>
+                    <input type="hidden" asp-for="CardExpiryDate" />
+                    <input asp-for="EndOfTheCurrentMonth" type="hidden" value="@endOfTheMonth" />
+                    <span asp-validation-for="ExpiryMonth" class="text-danger"></span>
+                    <span asp-validation-for="ExpiryYear" class="text-danger"></span>
+                    <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+                    <span asp-validation-for="CardExpiryDate" class="text-danger"></span>
+                    <span id="expiredCardAlert" class="text-danger" style="display:none">The card has expired</span>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardOwnersName">Cardholders Name</label>
+                    <input class="form-control holderName" asp-for="CardOwnersName" />
+                    <span asp-validation-for="CardOwnersName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.AddressLine1">Address Line 1</label>
+                    <input class="form-control address1" asp-for="CardAddress.AddressLine1" />
+                    <span asp-validation-for="CardAddress.AddressLine1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.AddressLine2">Address Line 2</label>
+                    <input class="form-control address2" asp-for="CardAddress.AddressLine2" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.Town">Town</label>
+                    <input class="form-control addressTowm" asp-for="CardAddress.Town" />
+                    <span asp-validation-for="CardAddress.Town" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.County">County</label>
+                    <input class="form-control addressCounty" asp-for="CardAddress.County" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="CardAddress.Postcode">Post Code</label>
+                    <input class="form-control addressPostCode" asp-for="CardAddress.Postcode" />
+                    <span asp-validation-for="CardAddress.Postcode" class="text-danger"></span>
+                </div>
+
+
+            <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="control-label" for="cardNumModal">Card Number: &nbsp;</label>
+                                <input disabled="disabled" id="modalCardNum" name="modalCardNum" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="modalCardExpiryDate">Card Expiry Date:</label>
+                                <input disabled="disabled" id="modalCardExpiryDate" name="modalCardExpiryDate" class="form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="modalCardOwnerName">Cardholder's Name:</label>
+                                <input disabled="disabled" id="modalCardOwnerName" name="modalCardOwnerName" class="form-control" />
+                            </div>
+                            <label>Address</label>
+                            <div class="form-group">
+                                <label class="control-label" for="modalAddress1">Line One:</label>
+                                <input disabled="disabled" id="modalAddress1" name="modalAddress1" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="modalAddress2">Line Two:</label>
+                                <input disabled="disabled" id="modalAddress2" name="modalAddress2" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="modalAddressTown">Town:</label>
+                                <input disabled="disabled" id="modalAddressTown" name="modalAddressTown" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="modalAddressCounty">County:</label>
+                                <input disabled="disabled" id="modalAddressCounty" name="modalAddressCounty" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="modalAddressPostCode">Post Code:</label>
+                                <input disabled="disabled" id="modalAddressPostCode" name="modalAddressPostCode" class="form-control" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Confirm Card Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" id="btnSubmit" class="btn btn-primary btn-lg" disabled data-toggle="modal" data-target="#confirmationModal"><i class=""></i>Register Card</button>
+                <div class="text-success">@ViewBag.UserMessage</div>
+            </div>
+        </form>
+    </div>
+</div>
